@@ -2,6 +2,7 @@ package edu.miu.cs545.restApi.service.impl;
 
 import edu.miu.cs545.restApi.domain.Post;
 import edu.miu.cs545.restApi.domain.dto.PostDto;
+import edu.miu.cs545.restApi.domain.dto.PostDtoV2;
 import edu.miu.cs545.restApi.repo.PostRepo;
 import edu.miu.cs545.restApi.service.PostService;
 import org.modelmapper.ModelMapper;
@@ -37,5 +38,10 @@ public class PostServiceImpl implements PostService {
     @Override
     public void update(Long id, PostDto postDto) {
         postRepo.update(id,modelMapper.map(postDto,Post.class));
+    }
+
+    @Override
+    public List<PostDtoV2> getAll2() {
+        return postRepo.findAll().stream().map(post -> modelMapper.map(post,PostDtoV2.class)).collect(Collectors.toList());
     }
 }
