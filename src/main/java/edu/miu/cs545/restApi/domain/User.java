@@ -5,18 +5,18 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-
+import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "posts")
-public class Post {
-
+@Table(name = "appUser")
+public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
-    private String title;
-    private String content;
-    private String author;
+    private Long id;
+    private String name;
+    @OneToMany
+    @JoinColumn
+    private List<Post> posts;
 }
