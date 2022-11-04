@@ -68,4 +68,9 @@ public class PostServiceImpl implements PostService {
         return new ArrayList<>(post.getComments());
     }
 
+    @Override
+    public List<Post> getPostsLikeTitle(String title) {
+        return postRepo.findByTitle(title);
+    }
+
 }

@@ -26,4 +26,6 @@ public interface UserService {
     User getUserByIdTest(Long id);
 
     List<UserDto> getUserMoreThanPosts(int post);
+
+    List<User> getUserFilteredPostTitle(String title);
 }

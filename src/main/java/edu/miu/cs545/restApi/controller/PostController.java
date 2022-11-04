@@ -1,6 +1,7 @@
 package edu.miu.cs545.restApi.controller;
 
 import edu.miu.cs545.restApi.domain.Comment;
+import edu.miu.cs545.restApi.domain.Post;
 import edu.miu.cs545.restApi.domain.dto.PostDto;
 import edu.miu.cs545.restApi.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/v1/posts/")
+@RequestMapping("/api/v1/posts")
 public class PostController {
     @Autowired
     private PostService postService;
@@ -49,5 +50,9 @@ public class PostController {
         return postService.getPostComments(id);
     }
 
+    @GetMapping("/filter")
+    public List<Post> getPostsLikeTitle(@RequestParam String title){
+        return postService.getPostsLikeTitle(title);
+    }
 
 }

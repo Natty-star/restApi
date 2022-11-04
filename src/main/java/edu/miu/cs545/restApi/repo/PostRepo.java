@@ -10,6 +10,5 @@ import java.util.List;
 
 @Repository
 public interface PostRepo extends JpaRepository<Post,Long> {
-
-//    List<PostDto> findByPostsId(Long id);
+    List<Post> findByTitle(String title);
 }

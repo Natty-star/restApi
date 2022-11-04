@@ -69,4 +69,9 @@ public class UserServiceImpl implements UserService {
     public List<UserDto> getUserMoreThanPosts(int post) {
         return userRepository.findByPostsGreaterThan(post).stream().map(user -> modelMapper.map(user,UserDto.class)).collect(Collectors.toList());
     }
+
+    @Override
+    public List<User> getUserFilteredPostTitle(String title) {
+        return userRepository.getUserFilteredPostTitle(title);
+    }
 }

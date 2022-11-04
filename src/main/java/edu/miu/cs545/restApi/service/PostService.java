@@ -1,6 +1,7 @@
 package edu.miu.cs545.restApi.service;
 
 import edu.miu.cs545.restApi.domain.Comment;
+import edu.miu.cs545.restApi.domain.Post;
 import edu.miu.cs545.restApi.domain.dto.PostDto;
 import edu.miu.cs545.restApi.domain.dto.PostDtoV2;
 
@@ -18,4 +19,6 @@ public interface PostService {
     void addComment(Long id, List<Comment> comment);
 
     List<Comment> getPostComments(Long id);
+
+    List<Post> getPostsLikeTitle(String title);
 }

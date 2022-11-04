@@ -55,8 +55,14 @@ public class UserController {
     }
 
     @GetMapping("/posts")
-    public List<UserDto> getUserMoreThanPosts(@RequestParam int post){
+    public List<UserDto> getUserMoreThanPosts(@RequestParam int post ){
         return userService.getUserMoreThanPosts(post);
+    }
+
+    //this can be done on getAll method
+    @GetMapping("/title")
+    public List<User> getUserFilteredPostTitle(@RequestParam(value = "filter", required = false) String title){
+        return userService.getUserFilteredPostTitle(title);
     }
 
 
