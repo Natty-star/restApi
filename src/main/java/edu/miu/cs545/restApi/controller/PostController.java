@@ -1,5 +1,6 @@
 package edu.miu.cs545.restApi.controller;
 
+import edu.miu.cs545.restApi.domain.Comment;
 import edu.miu.cs545.restApi.domain.dto.PostDto;
 import edu.miu.cs545.restApi.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,5 +39,15 @@ public class PostController {
     public void update(@PathVariable("id") Long id, @RequestBody PostDto postDto){
         postService.update(id,postDto);
     }
+
+    @PostMapping("/{id}/comments")
+    public void addComment(@PathVariable("id") Long id, @RequestBody List<Comment> comment){
+        postService.addComment(id,comment);
+    }
+    @GetMapping("/{id}/comments")
+    public List<Comment> getPostComments(@PathVariable("id") Long id){
+        return postService.getPostComments(id);
+    }
+
 
 }

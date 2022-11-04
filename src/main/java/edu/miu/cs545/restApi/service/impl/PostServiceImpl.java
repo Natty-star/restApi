@@ -1,5 +1,6 @@
 package edu.miu.cs545.restApi.service.impl;
 
+import edu.miu.cs545.restApi.domain.Comment;
 import edu.miu.cs545.restApi.domain.Post;
 import edu.miu.cs545.restApi.domain.dto.PostDto;
 import edu.miu.cs545.restApi.domain.dto.PostDtoV2;
@@ -9,6 +10,8 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -32,16 +35,37 @@ public class PostServiceImpl implements PostService {
 
     @Override
     public void delete(Long id) {
-        postRepo.delete(id);
+        postRepo.deleteById(id);
     }
 
     @Override
     public void update(Long id, PostDto postDto) {
-        postRepo.update(id,modelMapper.map(postDto,Post.class));
+        Post getPost = postRepo.findById(id).get();
+        getPost.setAuthor(postDto.getAuthor());
+        getPost.setContent(postDto.getContent());
+        getPost.setTitle(postDto.getTitle());
+        postRepo.save(modelMapper.map(getPost,Post.class));
     }
 
+    //version api v2
     @Override
     public List<PostDtoV2> getAll2() {
         return postRepo.findAll().stream().map(post -> modelMapper.map(post,PostDtoV2.class)).collect(Collectors.toList());
     }
+
+    @Override
+    public void addComment(Long id, List<Comment> comment) {
+        var p = postRepo.findById(id).get();
+       for (Comment c: comment ){
+           p.getComments().add(c);
+       }
+        postRepo.save(p);
+    }
+
+    @Override
+    public List<Comment> getPostComments(Long id) {
+        var post = postRepo.findById(id).get();
+        return new ArrayList<>(post.getComments());
+    }
+
 }

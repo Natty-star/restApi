@@ -3,8 +3,10 @@ package edu.miu.cs545.restApi.domain;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -19,4 +21,7 @@ public class Post {
     private String title;
     private String content;
     private String author;
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn
+    private List<Comment> comments;
 }
